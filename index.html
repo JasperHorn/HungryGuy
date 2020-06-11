@@ -10,6 +10,23 @@
     <!-- Don't use this in production: -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
+    <style>
+        .hungerBar {
+            height: 5px;
+            width: 500px;
+            background-color: lightgrey;
+            border-color: black;
+            border-width: 1px;
+            border-style: solid;
+            margin-bottom: 1em;
+        }
+
+        .hungerBar .hungerValue {
+            height: 100%;
+            background-color: red;
+        }
+    </style>
+
   </head>
 
   <body>
@@ -18,7 +35,9 @@
         class HungerHUD extends React.Component {
             render() {
                 return (
-                    <p>Your hunger is at: { this.props.hunger }</p>
+                    <div class="hungerBar">
+                        <div class="hungerValue" style={{ width: this.props.hunger + "%" }}></div>
+                    </div>
                 );
             };
         }
