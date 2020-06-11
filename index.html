@@ -42,13 +42,42 @@
             };
         }
 
-        class FeedButtons extends React.Component {
+        class EatAndDrinkButtons extends React.Component {
+            constructor(props) {
+                super(props);
+
+                this.menu = {
+                    food: [{
+                        name: 'burger',
+                        effectiveness: 12
+                    },{
+                        name: 'salad',
+                        effectiveness: 8
+                    }],
+                    drinks: [{
+                        name: 'soda',
+                        effectiveness: 10
+                    },{
+                        name: 'lemonade',
+                        effectiveness: 6
+                    }]
+                };
+            };
+
             render() {
+                const button = (action, menuItem) => (
+                    <button onClick={() => this.props.decreaseHunger(menuItem.effectiveness)}>
+                        {action} a {menuItem.name}
+                    </button>
+                );
+
+                const foodButtons = this.menu.food.map(item => button('Eat', item));
+                const drinkButtons = this.menu.drinks.map(item => button('Drink', item));
+
                 return (
                     <div>
-                        <button onClick={() => this.props.decreaseHunger(12)}>Eat a burger!</button>
-                        <button onClick={() => this.props.decreaseHunger(8)}>Eat a salad!</button>
-                        <button onClick={() => this.props.decreaseHunger(10)}>Drink a soda!</button>
+                        {foodButtons}
+                        {drinkButtons}
                     </div>
                 );
             };
@@ -70,7 +99,7 @@
                         <div>
                             <h1>HungryGuy</h1>
                             <HungerHUD hunger={this.state.hunger} />
-                            <FeedButtons decreaseHunger={ (n) => this.decreaseHunger(n) }/>
+                            <EatAndDrinkButtons decreaseHunger={ (n) => this.decreaseHunger(n) }/>
                         </div>
                     );
                 }
