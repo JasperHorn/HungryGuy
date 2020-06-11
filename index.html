@@ -45,7 +45,11 @@
         class FeedButtons extends React.Component {
             render() {
                 return (
-                    <button onClick={() => this.props.decreaseHunger(12)}>Eat a burger!</button>
+                    <div>
+                        <button onClick={() => this.props.decreaseHunger(12)}>Eat a burger!</button>
+                        <button onClick={() => this.props.decreaseHunger(8)}>Eat a salad!</button>
+                        <button onClick={() => this.props.decreaseHunger(10)}>Drink a soda!</button>
+                    </div>
                 );
             };
         }
