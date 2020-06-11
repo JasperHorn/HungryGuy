@@ -15,12 +15,43 @@
   <body>
     <div id="root"></div>
     <script type="text/babel">
-        class GamePage extends React.Component {
+        class HungerHUD extends React.Component {
             render() {
                 return (
-                    <h1>Hello World!</h1>
+                    <p>Your hunger is at: { this.props.hunger }</p>
                 );
             };
+        }
+
+        class GamePage extends React.Component {
+            constructor(props) {
+                super(props);
+
+                this.state = { hunger: 30 };
+            };
+
+            render() {
+                return (
+                    <div>
+                        <h1>Hello World!</h1>
+                        <HungerHUD hunger={this.state.hunger} />
+                    </div>
+                );
+            };
+
+            componentDidMount() {
+                this.interval = setInterval(() => this.increaseHunger(), 5000);
+            };
+
+            componentWillUnmount() {
+                clearInterval(this.interval);
+            };
+
+            increaseHunger() {
+                this.setState(state => ({
+                    hunger: state.hunger + 10
+                }));
+            }
         }
 
         ReactDOM.render(
