@@ -27,16 +27,29 @@
             constructor(props) {
                 super(props);
 
-                this.state = { hunger: 30 };
+                this.state = {
+                    hunger: 30,
+                    running: true
+                };
             };
 
             render() {
-                return (
-                    <div>
-                        <h1>Hello World!</h1>
-                        <HungerHUD hunger={this.state.hunger} />
-                    </div>
-                );
+                if (this.state.running) {
+                    return (
+                        <div>
+                            <h1>Hello World!</h1>
+                            <HungerHUD hunger={this.state.hunger} />
+                        </div>
+                    );
+                }
+                else {
+                    return (
+                        <div>
+                            <h1>Hello World!</h1>
+                            <p>Game over!</p>
+                        </div>
+                    );
+                }
             };
 
             componentDidMount() {
@@ -49,7 +62,8 @@
 
             increaseHunger() {
                 this.setState(state => ({
-                    hunger: state.hunger + 10
+                    hunger: state.hunger + 10,
+                    running: state.hunger + 10 <= 100
                 }));
             }
         }
