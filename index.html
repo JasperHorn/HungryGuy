@@ -23,6 +23,14 @@
             };
         }
 
+        class FeedButtons extends React.Component {
+            render() {
+                return (
+                    <button onClick={() => this.props.decreaseHunger(12)}>Eat a burger!</button>
+                );
+            };
+        }
+
         class GamePage extends React.Component {
             constructor(props) {
                 super(props);
@@ -39,6 +47,7 @@
                         <div>
                             <h1>Hello World!</h1>
                             <HungerHUD hunger={this.state.hunger} />
+                            <FeedButtons decreaseHunger={ (n) => this.decreaseHunger(n) }/>
                         </div>
                     );
                 }
@@ -65,6 +74,21 @@
                     hunger: state.hunger + 10,
                     running: state.hunger + 10 <= 100
                 }));
+            };
+
+            decreaseHunger(amount) {
+                this.setState(state => {
+                    let hunger = state.hunger - amount;
+
+                    if (hunger < 0) {
+                        hunger = 0;
+                    }
+
+                    return {
+                        hunger: hunger,
+                        running: state.running
+                    };
+                });
             }
         }
 
